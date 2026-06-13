@@ -2,185 +2,238 @@
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
+
   .romance-wrap {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     background: linear-gradient(135deg, #ffe0ec 0%, #ffc6d9 50%, #ffb3cc 100%);
-    padding: 2rem;
+    padding: 1.2rem;
     position: relative;
     overflow: hidden;
     font-family: 'Nunito', sans-serif;
   }
+
   .petals-bg { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
-  .petal { position: absolute; animation: fall linear infinite; opacity: 0.75; user-select: none; pointer-events: none; }
+  .petal { position: absolute; animation: fall linear; opacity: 0.75; user-select: none; pointer-events: none; }
   @keyframes fall {
     0%   { transform: translateY(-60px) rotate(0deg); opacity: 0.85; }
     100% { transform: translateY(110vh) rotate(400deg); opacity: 0; }
   }
   .sparkle { position: absolute; border-radius: 50%; animation: twinkle ease-in-out infinite; opacity: 0; pointer-events: none; }
   @keyframes twinkle {
-    0%, 100% { opacity: 0; transform: scale(0.4); }
-    50% { opacity: 1; transform: scale(1.5); }
+    0%,100% { opacity:0; transform:scale(0.4); }
+    50% { opacity:1; transform:scale(1.5); }
   }
+
   .card {
     background: white;
-    border-radius: 28px;
-    padding: 2.5rem 2rem 2rem;
-    max-width: 380px;
+    border-radius: 24px;
+    padding: 2rem 1.5rem 1.8rem;
     width: 100%;
+    max-width: 340px;
     text-align: center;
-    box-shadow: 0 20px 60px rgba(255,100,150,0.25), 0 4px 16px rgba(255,100,150,0.12);
+    box-shadow: 0 16px 50px rgba(255,100,150,0.25), 0 4px 14px rgba(255,100,150,0.12);
     position: relative;
     animation: cardIn 0.8s cubic-bezier(0.34,1.56,0.64,1) both;
     z-index: 10;
   }
+
   @keyframes cardIn {
-    from { opacity: 0; transform: scale(0.7) translateY(30px); }
-    to   { opacity: 1; transform: scale(1) translateY(0); }
+    from { opacity:0; transform:scale(0.7) translateY(30px); }
+    to   { opacity:1; transform:scale(1) translateY(0); }
   }
-  .heart-anim { font-size: 4.5rem; display: block; animation: heartbeat 1.2s ease-in-out infinite; margin-bottom: 0.4rem; }
+
+  .heart-anim { font-size: 3.8rem; display:block; animation: heartbeat 1.2s ease-in-out infinite; margin-bottom: 0.3rem; }
   @keyframes heartbeat {
-    0%,100% { transform: scale(1); }
-    14% { transform: scale(1.18); }
-    28% { transform: scale(1); }
-    42% { transform: scale(1.1); }
-    70% { transform: scale(1); }
+    0%,100% { transform:scale(1); }
+    14% { transform:scale(1.18); }
+    28% { transform:scale(1); }
+    42% { transform:scale(1.1); }
+    70% { transform:scale(1); }
   }
-  .card-title { font-family: 'Dancing Script', cursive; font-size: 2rem; color: #d63670; margin: 0.4rem 0 0.2rem; line-height: 1.3; }
-  .card-sub { font-size: 0.88rem; color: #c06090; margin-bottom: 1.2rem; font-style: italic; }
-  .btn-group { display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: 1.4rem; height: 56px; position: relative; }
+
+  .card-title { font-family:'Dancing Script',cursive; font-size:1.7rem; color:#d63670; margin:0.3rem 0 0.15rem; line-height:1.3; }
+  .card-sub { font-size:0.8rem; color:#c06090; margin-bottom:1rem; font-style:italic; padding:0 0.5rem; line-height:1.5; }
+
+  /* ===== TOMBOL AREA ===== */
+  .btn-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    margin-top: 1.2rem;
+  }
+
   .btn-yes {
-    padding: 14px 36px; font-size: 1rem; font-weight: 700; font-family: 'Nunito', sans-serif;
-    border: none; border-radius: 50px; cursor: pointer;
-    background: linear-gradient(135deg, #ff4d6d, #ff1a4e); color: white;
-    box-shadow: 0 4px 20px rgba(255,77,109,0.45);
-    transition: transform 0.15s, box-shadow 0.15s; position: relative; z-index: 5;
+    padding: 14px 38px;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: 'Nunito', sans-serif;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    background: linear-gradient(135deg, #ff4d6d, #ff1a4e);
+    color: white;
+    box-shadow: 0 4px 18px rgba(255,77,109,0.45);
+    transition: transform 0.4s cubic-bezier(.34,1.56,.64,1), padding 0.4s ease, font-size 0.4s ease, box-shadow 0.4s ease;
+    touch-action: manipulation;
   }
-  .btn-yes:hover { transform: scale(1.07); box-shadow: 0 6px 28px rgba(255,77,109,0.6); }
-  .btn-yes:active { transform: scale(0.96); }
+  .btn-yes:active { filter: brightness(1.1); }
+
+  .btn-no-wrap {
+    min-height: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    transition: opacity 0.4s ease;
+  }
+
   .btn-no {
-    padding: 13px 28px; font-size: 0.95rem; font-weight: 700; font-family: 'Nunito', sans-serif;
-    border: 2px solid #e8a0b8; border-radius: 50px; cursor: pointer;
-    background: white; color: #c06090;
-    transition: background 0.2s, color 0.2s; position: fixed; z-index: 200;
-    box-shadow: 0 2px 12px rgba(192,96,144,0.15);
+    padding: 11px 26px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    font-family: 'Nunito', sans-serif;
+    border: 2px solid #e8a0b8;
+    border-radius: 50px;
+    cursor: pointer;
+    background: white;
+    color: #c06090;
+    box-shadow: 0 2px 10px rgba(192,96,144,0.12);
+    transition: transform 0.3s cubic-bezier(.34,1.56,.64,1), opacity 0.4s ease, padding 0.3s ease, font-size 0.3s ease;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
   }
-  .btn-no:hover { background: #fff0f5; color: #d63670; }
 
+  .no-label {
+    font-size: 0.72rem;
+    color: #d63670;
+    font-weight: 700;
+    font-style: italic;
+    min-height: 16px;
+    transition: opacity 0.3s ease;
+    letter-spacing: 0.01em;
+  }
+
+  /* musik */
   .music-btn {
-    position: fixed; top: 18px; right: 18px; z-index: 300;
+    position: fixed; top: 14px; right: 14px; z-index: 300;
     background: white; border: 2px solid #ffb3cc; border-radius: 50px;
-    padding: 8px 18px; font-family: 'Nunito', sans-serif; font-size: 0.82rem;
+    padding: 7px 14px; font-family: 'Nunito', sans-serif; font-size: 0.75rem;
     font-weight: 700; color: #d63670; cursor: pointer;
-    box-shadow: 0 2px 12px rgba(255,100,150,0.2);
-    display: flex; align-items: center; gap: 6px; transition: transform 0.15s;
+    box-shadow: 0 2px 10px rgba(255,100,150,0.2);
+    display: flex; align-items: center; gap: 5px;
+    touch-action: manipulation;
   }
-  .music-btn:hover { transform: scale(1.05); }
+  .music-bars { display:flex; align-items:flex-end; gap:2px; height:14px; }
+  .music-bars span { display:inline-block; width:3px; background:#d63670; border-radius:2px; animation:barBounce 0.6s ease-in-out infinite alternate; }
+  .music-bars span:nth-child(1){height:5px;animation-delay:0s}
+  .music-bars span:nth-child(2){height:11px;animation-delay:0.15s}
+  .music-bars span:nth-child(3){height:8px;animation-delay:0.3s}
+  .music-bars span:nth-child(4){height:13px;animation-delay:0.1s}
+  .music-bars span:nth-child(5){height:6px;animation-delay:0.25s}
+  .music-bars.paused span { animation-play-state:paused; }
+  @keyframes barBounce { from{transform:scaleY(0.3)} to{transform:scaleY(1)} }
 
-  .music-bars { display: flex; align-items: flex-end; gap: 2px; height: 16px; }
-  .music-bars span {
-    display: inline-block; width: 3px; background: #d63670; border-radius: 2px;
-    animation: barBounce 0.6s ease-in-out infinite alternate;
-  }
-  .music-bars span:nth-child(1) { height: 6px; animation-delay: 0s; }
-  .music-bars span:nth-child(2) { height: 12px; animation-delay: 0.15s; }
-  .music-bars span:nth-child(3) { height: 9px; animation-delay: 0.3s; }
-  .music-bars span:nth-child(4) { height: 14px; animation-delay: 0.1s; }
-  .music-bars span:nth-child(5) { height: 7px; animation-delay: 0.25s; }
-  .music-bars.paused span { animation-play-state: paused; }
-
-  @keyframes barBounce {
-    from { transform: scaleY(0.3); }
-    to   { transform: scaleY(1); }
-  }
-
+  /* confetti */
   .confetti-piece {
-    position: fixed; opacity: 0; pointer-events: none; z-index: 9999;
+    position: fixed; opacity:0; pointer-events:none; z-index:9999;
     animation: confettiFall 1.4s ease-in forwards;
   }
   @keyframes confettiFall {
-    0%   { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
-    100% { opacity: 0; transform: translateY(280px) rotate(720deg) scale(0.4); }
+    0%   { opacity:1; transform:translateY(0) rotate(0deg) scale(1); }
+    100% { opacity:0; transform:translateY(260px) rotate(720deg) scale(0.4); }
   }
-  .main-screen { display: flex; flex-direction: column; align-items: center; }
-  .success-screen { display: none; flex-direction: column; align-items: center; gap: 0.6rem; }
-  .success-screen.show { display: flex; }
-  .success-title { font-family: 'Dancing Script', cursive; font-size: 2.2rem; color: #d63670; margin: 0; }
-  .success-msg { font-size: 0.9rem; color: #a05070; max-width: 260px; line-height: 1.6; }
+
+  .main-screen { display:flex; flex-direction:column; align-items:center; }
+  .success-screen { display:none; flex-direction:column; align-items:center; gap:0.5rem; }
+  .success-screen.show { display:flex; }
+  .success-title { font-family:'Dancing Script',cursive; font-size:2rem; color:#d63670; margin:0; }
+  .success-msg { font-size:0.85rem; color:#a05070; max-width:240px; line-height:1.6; }
   .wa-btn {
-    margin-top: 0.8rem; padding: 13px 32px; background: #25D366; color: white;
-    font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 700;
-    border: none; border-radius: 50px; cursor: pointer;
-    box-shadow: 0 4px 18px rgba(37,211,102,0.4);
-    transition: transform 0.15s; display: flex; align-items: center; gap: 10px;
+    margin-top:0.7rem; padding:13px 28px; background:#25D366; color:white;
+    font-family:'Nunito',sans-serif; font-size:0.95rem; font-weight:700;
+    border:none; border-radius:50px; cursor:pointer;
+    box-shadow:0 4px 16px rgba(37,211,102,0.4);
+    display:flex; align-items:center; gap:8px;
+    touch-action: manipulation;
   }
-  .wa-btn:hover { transform: scale(1.05); }
 
   .tap-hint {
-    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
-    background: rgba(255,255,255,0.85); border: 1.5px solid #ffb3cc;
-    border-radius: 50px; padding: 8px 20px;
-    font-family: 'Nunito', sans-serif; font-size: 0.8rem; color: #d63670;
-    font-weight: 700; z-index: 300; animation: fadeInUp 1s 1s both;
-    pointer-events: none;
+    position: fixed; bottom: 20px; left:50%; transform:translateX(-50%);
+    background: rgba(255,255,255,0.9); border:1.5px solid #ffb3cc;
+    border-radius:50px; padding:7px 18px;
+    font-family:'Nunito',sans-serif; font-size:0.75rem; color:#d63670;
+    font-weight:700; z-index:300; pointer-events:none; white-space:nowrap;
+    animation: fadeInUp 1s 1.5s both;
   }
   @keyframes fadeInUp {
-    from { opacity: 0; transform: translateX(-50%) translateY(10px); }
-    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+    from { opacity:0; transform:translateX(-50%) translateY(10px); }
+    to   { opacity:1; transform:translateX(-50%) translateY(0); }
   }
+
+  /* shake animasi kalau tombol engga ditekan */
+  @keyframes shakeBtnYes {
+    0%,100%{transform:translateX(0)}
+    20%{transform:translateX(-5px)}
+    40%{transform:translateX(5px)}
+    60%{transform:translateX(-4px)}
+    80%{transform:translateX(4px)}
+  }
+  .shake { animation: shakeBtnYes 0.4s ease !important; }
 </style>
 
-<div class="romance-wrap" id="wrap">
+<div class="romance-wrap">
   <div class="petals-bg" id="petals"></div>
 
-  <button class="music-btn" id="musicBtn" onclick="toggleMusic()">
-    <div class="music-bars" id="musicBars">
-      <span></span><span></span><span></span><span></span><span></span>
-    </div>
-    <span id="musicLabel">Play Musik</span>
+  <button class="music-btn" onclick="toggleMusic()">
+    <div class="music-bars" id="musicBars"><span></span><span></span><span></span><span></span><span></span></div>
+    <span id="musicLabel">Play</span>
   </button>
 
   <div id="tapHint" class="tap-hint">🎵 Tap untuk mulai musik</div>
 
-  <div class="card" id="card">
+  <div class="card">
     <div class="main-screen" id="mainScreen">
-      <span class="heart-anim">💝</span>
+      <span class="heart-anim" id="heartEmoji">💝</span>
       <h1 class="card-title">Do you wanna be my BF? 🌹</h1>
-      <p class="card-sub">I know im new in relationship, could you give me a chance?</p>
-      <svg viewBox="0 0 160 120" width="160" height="120" style="margin:0 auto 1rem;display:block;">
-        <ellipse cx="80" cy="108" rx="68" ry="10" fill="#f9cde0" opacity="0.5"/>
-        <rect x="30" y="52" width="100" height="56" rx="10" fill="#fff0f5" stroke="#ffb3cc" stroke-width="1"/>
-        <path d="M30 62 Q80 38 130 62" fill="#ffd6e8" stroke="#ffb3cc" stroke-width="1"/>
-        <circle cx="80" cy="40" r="20" fill="#ffe0ec" stroke="#ff9ab8" stroke-width="1.2"/>
-        <circle cx="73" cy="37" r="3" fill="#d63670"/>
-        <circle cx="87" cy="37" r="3" fill="#d63670"/>
-        <path d="M74 45 Q80 50 86 45" fill="none" stroke="#d63670" stroke-width="1.5" stroke-linecap="round"/>
-        <circle cx="73" cy="37" r="1" fill="white" opacity="0.8"/>
-        <circle cx="87" cy="37" r="1" fill="white" opacity="0.8"/>
-        <path d="M62 40 Q60 32 65 28" fill="none" stroke="#ffb3cc" stroke-width="1.5" stroke-linecap="round"/>
-        <path d="M98 40 Q100 32 95 28" fill="none" stroke="#ffb3cc" stroke-width="1.5" stroke-linecap="round"/>
-        <rect x="50" y="72" width="20" height="36" rx="4" fill="#ff6b9d"/>
-        <rect x="90" y="72" width="20" height="36" rx="4" fill="#ff6b9d"/>
-        <rect x="42" y="60" width="76" height="18" rx="4" fill="#ff4d6d"/>
-        <rect x="65" y="60" width="30" height="48" rx="4" fill="#ff6b9d"/>
-        <path d="M58 75 Q62 68 70 72" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/>
-        <path d="M102 75 Q98 68 90 72" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round"/>
-        <text x="64" y="97" text-anchor="middle" font-size="9" fill="#fff" font-family="Nunito,sans-serif">💐</text>
-        <text x="96" y="97" text-anchor="middle" font-size="9" fill="#fff" font-family="Nunito,sans-serif">💍</text>
+      <p class="card-sub">I know I'm new in relationship,<br>could you give me a chance?</p>
+
+      <svg viewBox="0 0 140 105" width="130" height="98" style="margin:0 auto 0.8rem;display:block;">
+        <ellipse cx="70" cy="98" rx="60" ry="8" fill="#f9cde0" opacity="0.5"/>
+        <rect x="20" y="46" width="100" height="52" rx="10" fill="#fff0f5" stroke="#ffb3cc" stroke-width="1"/>
+        <path d="M20 56 Q70 32 120 56" fill="#ffd6e8" stroke="#ffb3cc" stroke-width="1"/>
+        <circle cx="70" cy="34" r="18" fill="#ffe0ec" stroke="#ff9ab8" stroke-width="1.2"/>
+        <circle cx="63" cy="31" r="2.5" fill="#d63670"/>
+        <circle cx="77" cy="31" r="2.5" fill="#d63670"/>
+        <path d="M65 40 Q70 44 75 40" fill="none" stroke="#d63670" stroke-width="1.4" stroke-linecap="round"/>
+        <circle cx="63" cy="31" r="0.8" fill="white" opacity="0.9"/>
+        <circle cx="77" cy="31" r="0.8" fill="white" opacity="0.9"/>
+        <rect x="42" y="66" width="18" height="32" rx="4" fill="#ff6b9d"/>
+        <rect x="80" y="66" width="18" height="32" rx="4" fill="#ff6b9d"/>
+        <rect x="34" y="54" width="72" height="17" rx="4" fill="#ff4d6d"/>
+        <rect x="57" y="54" width="26" height="44" rx="4" fill="#ff6b9d"/>
+        <text x="51" y="89" text-anchor="middle" font-size="9" fill="#fff" font-family="Nunito,sans-serif">💐</text>
+        <text x="89" y="89" text-anchor="middle" font-size="9" fill="#fff" font-family="Nunito,sans-serif">💍</text>
       </svg>
-      <div class="btn-group" id="btnGroup">
+
+      <div class="btn-area">
         <button class="btn-yes" id="btnYes" onclick="handleYes()">Mau banget! 💕</button>
-        <button class="btn-no" id="btnNo" onmouseover="runAway()" ontouchstart="runAway()">Enggak 🙈</button>
+        <div class="btn-no-wrap" id="btnNoWrap">
+          <button class="btn-no" id="btnNo" onclick="handleNo()">Enggak 🙈</button>
+          <span class="no-label" id="noLabel"></span>
+        </div>
       </div>
     </div>
+
     <div class="success-screen" id="successScreen">
       <span class="heart-anim">🎉</span>
       <p class="success-title">Yeayyyy! 🥰</p>
       <p class="success-msg">Happy to hear that, you made my day ✨</p>
       <button class="wa-btn" onclick="kirimWA()">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.985-1.406A9.962 9.962 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 11.999 2z"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M11.999 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.985-1.406A9.962 9.962 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 11.999 2z"/></svg>
         Kabarin lewat WA!
       </button>
     </div>
@@ -191,57 +244,96 @@
 const nomorWA = "6285278066109";
 const pesanJawaban = "Iyaaa, aku mau jadi BF kamu! 🥰❤️";
 
-let audioCtx = null;
-let musicPlaying = false;
-let loopTimeout = null;
-let startedOnce = false;
+// ===== STATE TOMBOL ENGGAK =====
+// Tiap kali tekan "Enggak": tombol mengecil, teks berubah, tombol Ya membesar
+const noStages = [
+  { noText: "Enggak 🙈",   label: "",                        noScale: 1,    yesScale: 1,    noOpacity: 1,   heart: "💝" },
+  { noText: "Yakin? 🥺",   label: "Pikir lagi deh...",       noScale: 0.82, yesScale: 1.12, noOpacity: 0.9, heart: "🥺" },
+  { noText: "Beneran? 😢", label: "Jangan dong...",          noScale: 0.64, yesScale: 1.25, noOpacity: 0.7, heart: "😢" },
+  { noText: "Masih? 😭",   label: "Aku sedih banget nih...", noScale: 0.46, yesScale: 1.4,  noOpacity: 0.5, heart: "😭" },
+  { noText: "Hiks... 💔",  label: "Sekali lagi ya? 🙏",     noScale: 0.28, yesScale: 1.55, noOpacity: 0.3, heart: "💔" },
+];
 
-// ==== MELODI: A Thousand Years style (C major, romantic waltz feel) ====
-// Format: [frekuensi, durasi_detik]
+let noStep = 0;
+
+const btnYes    = document.getElementById('btnYes');
+const btnNo     = document.getElementById('btnNo');
+const btnNoWrap = document.getElementById('btnNoWrap');
+const noLabel   = document.getElementById('noLabel');
+const heartEmoji = document.getElementById('heartEmoji');
+
+// Base sizes
+const YES_BASE_PAD_V = 14, YES_BASE_PAD_H = 38, YES_BASE_FONT = 1.0;
+const NO_BASE_PAD_V  = 11, NO_BASE_PAD_H  = 26, NO_BASE_FONT  = 0.9;
+
+function handleNo() {
+  noStep++;
+
+  if (noStep >= noStages.length) {
+    // Tombol enggak menghilang total
+    btnNoWrap.style.opacity = '0';
+    btnNoWrap.style.pointerEvents = 'none';
+    setTimeout(() => { btnNoWrap.style.display = 'none'; }, 400);
+    noLabel.textContent = '';
+    heartEmoji.textContent = '🥺';
+    shakeYes();
+    return;
+  }
+
+  const s = noStages[noStep];
+
+  // Update teks tombol Enggak
+  btnNo.textContent = s.noText;
+  noLabel.textContent = s.label;
+  heartEmoji.textContent = s.heart;
+
+  // Mengecilkan tombol Enggak
+  btnNo.style.transform = `scale(${s.noScale})`;
+  btnNo.style.opacity = s.noOpacity;
+  btnNo.style.padding = `${NO_BASE_PAD_V * s.noScale}px ${NO_BASE_PAD_H * s.noScale}px`;
+  btnNo.style.fontSize = (NO_BASE_FONT * Math.max(s.noScale, 0.5)) + 'rem';
+
+  // Membesarkan tombol Ya
+  btnYes.style.transform = `scale(${s.yesScale})`;
+  btnYes.style.padding = `${YES_BASE_PAD_V * Math.min(s.yesScale, 1.4)}px ${YES_BASE_PAD_H * Math.min(s.yesScale, 1.4)}px`;
+  btnYes.style.fontSize = (YES_BASE_FONT * Math.min(s.yesScale, 1.3)) + 'rem';
+  btnYes.style.boxShadow = `0 ${4 * s.yesScale}px ${20 * s.yesScale}px rgba(255,77,109,${Math.min(0.45 + noStep * 0.08, 0.75)})`;
+
+  shakeYes();
+  playNoSound(noStep);
+}
+
+function shakeYes() {
+  btnYes.classList.remove('shake');
+  void btnYes.offsetWidth;
+  btnYes.classList.add('shake');
+  setTimeout(() => btnYes.classList.remove('shake'), 450);
+}
+
+// ===== MUSIK =====
+let audioCtx = null, musicPlaying = false, loopTimeout = null, startedOnce = false;
+
 const song = [
-  // Intro arpeggio
-  [523,0.2],[659,0.2],[784,0.2],[1047,0.4],
-  [988,0.2],[784,0.2],[659,0.4],
-  [523,0.2],[659,0.2],[784,0.2],[1047,0.4],
-  [988,0.4],[784,0.4],
-
-  // Melodi utama - baris 1
+  [523,0.2],[659,0.2],[784,0.2],[1047,0.4],[988,0.2],[784,0.2],[659,0.4],
+  [523,0.2],[659,0.2],[784,0.2],[1047,0.4],[988,0.4],[784,0.4],
   [784,0.4],[880,0.2],[784,0.2],[698,0.4],[784,0.2],[698,0.2],
   [659,0.6],[587,0.2],[523,0.4],
   [587,0.4],[659,0.2],[587,0.2],[523,0.4],[587,0.2],[523,0.2],
   [494,0.8],[494,0.4],
-
-  // Melodi utama - baris 2 (naik)
   [784,0.4],[880,0.2],[784,0.2],[988,0.4],[880,0.2],[784,0.2],
   [1047,0.6],[988,0.2],[880,0.4],
   [784,0.4],[880,0.2],[784,0.2],[698,0.4],[659,0.2],[587,0.2],
   [523,0.8],[523,0.4],
-
-  // Bridge romantis
   [659,0.3],[784,0.3],[880,0.3],[988,0.3],[1047,0.6],
   [988,0.3],[880,0.3],[784,0.3],[698,0.3],[659,0.6],
-  [587,0.3],[659,0.3],[784,0.3],[880,0.3],[988,0.6],
-  [880,0.3],[784,0.3],[659,0.3],[523,0.3],[523,0.6],
-
-  // Chorus (lebih semangat)
   [1047,0.3],[988,0.3],[880,0.3],[784,0.3],[880,0.6],
   [988,0.3],[1047,0.3],[988,0.3],[880,0.3],[784,0.6],
   [784,0.3],[880,0.3],[988,0.3],[1047,0.3],[1175,0.6],
   [1047,0.4],[988,0.4],[880,0.4],[784,0.8],
-
-  // Outro (turun lembut)
   [784,0.3],[698,0.3],[659,0.3],[587,0.3],[523,0.6],
-  [587,0.3],[659,0.3],[784,0.3],[659,0.3],[523,0.6],
   [523,0.8],[523,1.0],
 ];
-
-// Chord backing (akord bawah untuk kedalaman)
-const chords = [
-  [[262,330,392], 2.4],
-  [[247,311,370], 2.4],
-  [[220,277,349], 2.4],
-  [[196,262,330], 2.4],
-];
+const chords = [[[262,330,392],2.4],[[247,311,370],2.4],[[220,277,349],2.4],[[196,262,330],2.4]];
 
 function getCtx() {
   if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -250,133 +342,104 @@ function getCtx() {
 
 function playNote(freq, startTime, dur, vol, type) {
   const ctx = getCtx();
-  const osc = ctx.createOscillator();
-  const gain = ctx.createGain();
+  const osc = ctx.createOscillator(), gain = ctx.createGain();
   osc.type = type || 'sine';
   osc.frequency.setValueAtTime(freq, startTime);
   gain.gain.setValueAtTime(0, startTime);
   gain.gain.linearRampToValueAtTime(vol, startTime + 0.03);
   gain.gain.setValueAtTime(vol * 0.8, startTime + dur * 0.6);
   gain.gain.exponentialRampToValueAtTime(0.0001, startTime + dur * 0.98);
-  osc.connect(gain);
-  gain.connect(ctx.destination);
-  osc.start(startTime);
-  osc.stop(startTime + dur);
+  osc.connect(gain); gain.connect(ctx.destination);
+  osc.start(startTime); osc.stop(startTime + dur);
 }
 
-function playChord(freqs, startTime, dur) {
-  freqs.forEach(f => playNote(f, startTime, dur, 0.05, 'triangle'));
+function playNoSound(step) {
+  // Suara sedih/menurun tiap pencet engga
+  const ctx = getCtx();
+  const sadNotes = [[392,0.15],[349,0.15],[330,0.2],[294,0.3]];
+  let t = ctx.currentTime + 0.05;
+  sadNotes.slice(0, step + 1).forEach(([f, d]) => {
+    playNote(f, t, d, 0.12, 'sine');
+    t += d;
+  });
 }
 
 function playSong() {
   const ctx = getCtx();
   let t = ctx.currentTime + 0.1;
-  let totalDur = 0;
-
-  // Backing chords loop
-  const chordDur = song.reduce((s, n) => s + n[1], 0);
-  let ct = ctx.currentTime + 0.1;
-  let ci = 0;
-  for (let elapsed = 0; elapsed < chordDur; elapsed += chords[ci % chords.length][1]) {
-    const [cfreqs, cdur] = chords[ci % chords.length];
-    playChord(cfreqs, ct + elapsed, cdur * 0.9);
+  const chordDur = song.reduce((s,n) => s + n[1], 0);
+  let ct = ctx.currentTime + 0.1, ci = 0;
+  for (let e = 0; e < chordDur; e += chords[ci % chords.length][1]) {
+    const [cf, cd] = chords[ci % chords.length];
+    cf.forEach(f => playNote(f, ct + e, cd * 0.9, 0.05, 'triangle'));
     ci++;
   }
-
-  // Melodi utama (sine + overtone)
   song.forEach(([freq, dur]) => {
     playNote(freq, t, dur, 0.18, 'sine');
     playNote(freq * 2, t, dur * 0.5, 0.04, 'triangle');
     t += dur;
   });
-
-  totalDur = t - ctx.currentTime;
-  return totalDur * 1000;
+  return (t - ctx.currentTime) * 1000;
 }
 
 function startMusic() {
   if (musicPlaying) return;
-  musicPlaying = true;
-  startedOnce = true;
+  musicPlaying = true; startedOnce = true;
   document.getElementById('musicLabel').textContent = 'Pause';
   document.getElementById('musicBars').classList.remove('paused');
   hideTapHint();
-
-  function loop() {
-    const dur = playSong();
-    loopTimeout = setTimeout(loop, dur - 300);
-  }
+  function loop() { const dur = playSong(); loopTimeout = setTimeout(loop, dur - 300); }
   loop();
 }
-
 function stopMusic() {
   musicPlaying = false;
   if (loopTimeout) { clearTimeout(loopTimeout); loopTimeout = null; }
-  document.getElementById('musicLabel').textContent = 'Play Musik';
+  document.getElementById('musicLabel').textContent = 'Play';
   document.getElementById('musicBars').classList.add('paused');
 }
-
-function toggleMusic() {
-  if (!musicPlaying) startMusic(); else stopMusic();
-}
-
+function toggleMusic() { if (!musicPlaying) startMusic(); else stopMusic(); }
 function hideTapHint() {
   const h = document.getElementById('tapHint');
-  if (h) { h.style.opacity = '0'; h.style.transition = 'opacity 0.4s'; setTimeout(() => h.remove(), 400); }
+  if (h) { h.style.opacity = '0'; h.style.transition = 'opacity 0.4s'; setTimeout(() => h && h.remove(), 400); }
 }
-
-// Auto-play: coba langsung, fallback ke tap pertama
 function tryAutoPlay() {
   try {
     const ctx = getCtx();
-    if (ctx.state === 'suspended') {
-      ctx.resume().then(() => startMusic()).catch(() => {});
-    } else {
-      startMusic();
-    }
+    if (ctx.state === 'suspended') ctx.resume().then(() => startMusic()).catch(()=>{});
+    else startMusic();
   } catch(e) {}
 }
-
-// Fallback: mulai musik saat user pertama kali tap/klik di mana saja
 function onFirstInteraction() {
-  if (!startedOnce) {
-    startMusic();
-  }
+  if (!startedOnce) startMusic();
   document.removeEventListener('click', onFirstInteraction);
   document.removeEventListener('touchstart', onFirstInteraction);
 }
 document.addEventListener('click', onFirstInteraction);
 document.addEventListener('touchstart', onFirstInteraction);
 
-window.addEventListener('load', () => {
-  setTimeout(tryAutoPlay, 300);
-  positionBtnNo();
-});
-
-// ==== Petals & sparkles ====
+// ===== PETALS =====
 const petalSymbols = ['🌸','🌺','🌹','💮','✨','💫','🌟','🎀','💕'];
 const petalsEl = document.getElementById('petals');
-
 function spawnPetal() {
   const el = document.createElement('div');
   el.className = 'petal';
   el.textContent = petalSymbols[Math.floor(Math.random() * petalSymbols.length)];
   el.style.left = Math.random() * 100 + 'vw';
   el.style.top = '-40px';
-  el.style.fontSize = (0.8 + Math.random() * 1.2) + 'rem';
+  el.style.fontSize = (0.7 + Math.random() * 1) + 'rem';
   el.style.animationDuration = (5 + Math.random() * 6) + 's';
   petalsEl.appendChild(el);
   setTimeout(() => el.remove(), 13000);
 }
-setInterval(spawnPetal, 700);
-for (let i = 0; i < 10; i++) setTimeout(spawnPetal, i * 150);
+setInterval(spawnPetal, 800);
+for (let i = 0; i < 8; i++) setTimeout(spawnPetal, i * 180);
 
 function spawnSparkle() {
   const s = document.createElement('div');
   s.className = 'sparkle';
   s.style.left = Math.random() * 100 + 'vw';
   s.style.top = Math.random() * 100 + 'vh';
-  const sz = 4 + Math.random() * 7;
+  const sz = 3 + Math.random() * 6;
   s.style.width = s.style.height = sz + 'px';
   s.style.animationDuration = (1.5 + Math.random() * 2) + 's';
   s.style.animationDelay = (Math.random() * 2) + 's';
@@ -384,46 +447,24 @@ function spawnSparkle() {
   petalsEl.appendChild(s);
   setTimeout(() => s.remove(), 5000);
 }
-setInterval(spawnSparkle, 350);
+setInterval(spawnSparkle, 400);
 
-// ==== Tombol Enggak ====
-const btnNo = document.getElementById('btnNo');
-
-function positionBtnNo() {
-  const bw = btnNo.offsetWidth || 110;
-  const bh = btnNo.offsetHeight || 46;
-  btnNo.style.left = ((window.innerWidth - bw) / 2) + 'px';
-  btnNo.style.top  = ((window.innerHeight - bh) / 2 + 44) + 'px';
-}
-window.addEventListener('resize', positionBtnNo);
-
-function runAway() {
-  const margin = 24;
-  const bw = btnNo.offsetWidth || 110;
-  const bh = btnNo.offsetHeight || 46;
-  const x = margin + Math.random() * (window.innerWidth - bw - margin * 2);
-  const y = margin + Math.random() * (window.innerHeight - bh - margin * 2);
-  btnNo.style.transition = 'left 0.22s cubic-bezier(.34,1.56,.64,1), top 0.22s cubic-bezier(.34,1.56,.64,1)';
-  btnNo.style.left = x + 'px';
-  btnNo.style.top  = y + 'px';
-}
-
-// ==== Confetti ====
+// ===== CONFETTI & SUCCESS =====
 function launchConfetti(ox, oy) {
   const colors = ['#ff4d6d','#ff9ab8','#d63670','#ffd6e8','#ff6b9d','#ff1a4e','#ffffff','#ffb3cc'];
-  for (let i = 0; i < 70; i++) {
+  for (let i = 0; i < 60; i++) {
     const el = document.createElement('div');
     el.className = 'confetti-piece';
-    el.style.left = (ox + (Math.random() - 0.5) * 160) + 'px';
-    el.style.top  = (oy + (Math.random() - 0.5) * 40) + 'px';
+    el.style.left = (ox + (Math.random() - 0.5) * 140) + 'px';
+    el.style.top  = (oy + (Math.random() - 0.5) * 30) + 'px';
     el.style.background = colors[Math.floor(Math.random() * colors.length)];
     el.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
-    const sz = 5 + Math.random() * 9;
+    const sz = 4 + Math.random() * 8;
     el.style.width = sz + 'px'; el.style.height = sz + 'px';
-    el.style.animationDuration = (0.9 + Math.random() * 0.9) + 's';
-    el.style.animationDelay = (Math.random() * 0.25) + 's';
+    el.style.animationDuration = (0.9 + Math.random() * 0.8) + 's';
+    el.style.animationDelay = (Math.random() * 0.2) + 's';
     document.body.appendChild(el);
-    setTimeout(() => el.remove(), 2200);
+    setTimeout(() => el.remove(), 2000);
   }
 }
 
@@ -439,20 +480,20 @@ function playCelebration() {
 }
 
 function handleYes() {
-  const btn = document.getElementById('btnYes');
-  const rect = btn.getBoundingClientRect();
+  const rect = btnYes.getBoundingClientRect();
   playCelebration();
   launchConfetti(rect.left + rect.width / 2, rect.top);
-  btnNo.style.display = 'none';
   setTimeout(() => {
     document.getElementById('mainScreen').style.display = 'none';
     document.getElementById('successScreen').classList.add('show');
     launchConfetti(window.innerWidth / 2, window.innerHeight / 3);
-  }, 600);
+  }, 400);
 }
 
 function kirimWA() {
   const url = `https://api.whatsapp.com/send?phone=${nomorWA}&text=${encodeURIComponent(pesanJawaban)}`;
   window.open(url, '_blank');
 }
+
+window.addEventListener('load', () => setTimeout(tryAutoPlay, 300));
 </script>
